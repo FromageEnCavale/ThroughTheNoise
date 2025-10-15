@@ -174,7 +174,7 @@ section {
     grid-gap: 32px;
 }
 
-.item {
+.gallery-item {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -200,14 +200,14 @@ section {
     gap: 16px;
 }
 
-.list li {
+.list-item {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 0 8px;
 }
 
-.list li + li {
+.list-item + .list-item {
     border-top: 1px solid rgba(61, 44, 46, 0.1);
     padding-top: 16px;
 }
@@ -227,7 +227,7 @@ section {
     font-style: italic;
 }
 
-.info a {
+.info span {
     color: var(--4);
 }
 
@@ -276,16 +276,16 @@ footer {
         opacity: 60%;
     }
 
-    .item:hover .best-title {
-        opacity: 60%;
+    .gallery-item:hover .best-title {
+        opacity: 80%;
     }
 
     .load-more:hover {
         opacity: 60%;
     }
 
-    .info a:hover {
-        opacity: 60%;
+    .list-item:hover .latest-title {
+        opacity: 80%;
     }
 
 }

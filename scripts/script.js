@@ -285,13 +285,13 @@ function renderBestNewsItem(item) {
     link.href = item.url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.className = 'item';
+    link.className = 'gallery-item';
 
     const imageUrl = getImageByID(item.id);
     const dateStr = formatRelativeTime(item.time);
 
     link.innerHTML = `
-    <img src="${imageUrl}" alt="Article: ${escapeHTML(item.title)}" loading="lazy">
+    <img src="${imageUrl}" alt="New: ${escapeHTML(item.title)}" loading="lazy">
     <div class="text-container">
       <div class="best-title">${escapeHTML(item.title)}</div>
       <div class="date">${dateStr}</div>
@@ -309,7 +309,7 @@ function renderBestNewsItem(item) {
 function updateBestNewsLoadButton() {
     const loadBtn = document.getElementById('loadMoreBest');
     const gallery = document.querySelector('.gallery');
-    const renderedItems = gallery.querySelectorAll('.item').length;
+    const renderedItems = gallery.querySelectorAll('.gallery-item').length;
     const totalProcessedIds = (bestNewsPage + 1) * ITEMS_PER_PAGE;
 
     // Show button if we haven't processed all IDs yet
@@ -321,23 +321,29 @@ function updateBestNewsLoadButton() {
 /**
  * Render a single latest news item immediately to the list.
  * Item is added to the DOM as soon as it arrives.
+ * The entire item is clickable, similar to best news gallery.
  */
 function renderLatestNewsItem(item) {
     const list = document.querySelector('.list');
 
-    const li = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'list-item';
+
     const dateStr = formatRelativeTime(item.time);
     const domain = extractDomain(item.url);
 
-    li.innerHTML = `
+    link.innerHTML = `
     <div class="latest-title">${escapeHTML(item.title)}</div>
     <div class="info">
       <div class="date">${dateStr}</div>
-      <a href="${item.url}" target="_blank" rel="noopener noreferrer">(${domain})</a>
+      <span>(${domain})</span>
     </div>
   `;
 
-    list.appendChild(li);
+    list.appendChild(link);
 }
 
 /**
@@ -348,7 +354,7 @@ function renderLatestNewsItem(item) {
 function updateLatestNewsLoadButton() {
     const loadBtn = document.getElementById('loadMoreLatest');
     const list = document.querySelector('.list');
-    const renderedItems = list.querySelectorAll('li').length;
+    const renderedItems = list.querySelectorAll('.list-item').length;
     const totalProcessedIds = (latestNewsPage + 1) * ITEMS_PER_PAGE;
 
     // Show button if we haven't processed all IDs yet
