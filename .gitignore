@@ -1,0 +1,58 @@
+# Ignorer les fichiers de configuration spécifiques à l'utilisateur
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Ignorer les fichiers de build
+/build/
+/dist/
+*.log
+
+# Ignorer les fichiers de cache
+.cache/
+
+# Ignorer les fichiers de configuration de l'environnement
+.env
+.env.local
+.env.*.local
+
+# Ignorer les fichiers de Node.js
+package-lock.json
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorer les fichiers de macOS
+.DS_Store
+
+# Ignorer les fichiers de Windows
+Thumbs.db
+ehthumbs.db
+
+# Ignorer les fichiers de sauvegarde
+*.bak
+*.tmp
+*.swp
+
+# Ignorer les fichiers de documentation générés
+_site/
+_build/
+
+# Ignorer les fichiers de Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Ignorer les fichiers de configuration de base de données
+*.sqlite3
+
+# Ignorer les fichiers de configuration de CI/CD
+.github/
+.gitlab-ci.yml
+
+# Ignorer les fichiers de configuration de déploiement
+.deploy/

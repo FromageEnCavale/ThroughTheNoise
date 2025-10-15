@@ -1,0 +1,291 @@
+/* ----- RESET CSS ----- */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overscroll-behavior: none;
+}
+
+html, body {
+    width: 100%;
+    font-size: 100%;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button, input, textarea, select {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* ----- FONTS ----- */
+
+@font-face {
+    font-family: 'NotoSerif';
+    src: url("../assets/fonts/NotoSerif.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NotoSerif';
+    src: url("../assets/fonts/NotoSerif-Italic.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ----- COLORS ----- */
+
+:root {
+    --1: #3D2C2E;
+    --2: #FFDAC6;
+    --3: #7C6A0A;
+    --4: #053225;
+    --5: #FFF2EB;
+}
+
+/* ----- BODY ----- */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 128px;
+    padding: 0 16px;
+    color: var(--1);
+    background-color: var(--5);
+    font-family: "NotoSerif", serif;
+    line-height: 1.4;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+/* ----- HEADER ----- */
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 128px;
+    max-width: 880px;
+    width: 100%;
+    padding: 12px 0 0 0;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.website-title {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.headline {
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    font-style: italic;
+}
+
+/* ----- MAIN ----- */
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 128px;
+    max-width: 880px;
+    width: 100%;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    width: 100%;
+    scroll-margin-top: 64px;
+}
+
+.section-title {
+    font-weight: 900;
+    font-size: 38px;
+    font-style: italic;
+}
+
+#best .section-title {
+    color: var(--3);
+}
+
+#latest {
+    max-width: 660px;
+}
+
+#latest .section-title {
+    color: var(--4);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    justify-content: center;
+    grid-gap: 32px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.best-title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.list li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.list li + li {
+    border-top: 1px solid rgba(61, 44, 46, 0.1);
+    padding-top: 16px;
+}
+
+.latest-title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.info {
+    display: flex;
+    gap: 12px;
+}
+
+.date {
+    opacity: 82%;
+    font-style: italic;
+}
+
+.info a {
+    color: var(--4);
+}
+
+.load-more {
+    width: fit-content;
+    padding: 0 8px;
+    font-weight: 500;
+}
+
+#loadMoreBest {
+    display: none;
+}
+
+#loadMoreLatest {
+    display: none;
+}
+
+/* ----- FOOTER ----- */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 128px;
+    max-width: 880px;
+    width: 100%;
+    padding: 0 0 128px 0;
+}
+
+.about {
+    max-width: 440px;
+}
+
+/* ----- MEDIA QUERY ----- */
+
+@media (min-width: 880px) {
+
+    .headline {
+        font-size: 20px;
+    }
+
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+    .link a:hover {
+        opacity: 60%;
+    }
+
+    .item:hover .best-title {
+        opacity: 60%;
+    }
+
+    .load-more:hover {
+        opacity: 60%;
+    }
+
+    .info a:hover {
+        opacity: 60%;
+    }
+
+}
