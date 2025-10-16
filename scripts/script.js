@@ -7,11 +7,8 @@ const LATEST_NEWS_API = `${HN_API_BASE}/topstories.json`;
 const ITEM_API = (id) => `${HN_API_BASE}/item/${id}.json`;
 const IMAGES = [
     '../assets/DarkGreen.png',
-    '../assets/DarkGreenLess.png',
     '../assets/Olive.png',
-    '../assets/OliveLess.png',
-    '../assets/VanDyke.png',
-    '../assets/VanDykeLess.png'
+    '../assets/VanDyke.png'
 ];
 const MIN_SCORE_LATEST = 0;
 
@@ -27,15 +24,25 @@ let initialLoadComplete = {
     best: false,
     latest: false
 };
+let lastUsedImage = null;
 
 // ===== Utility Functions =====
 
 /**
- * Get a deterministic image path based on item ID
+ * Get a deterministic image path based on item ID, avoiding consecutive duplicates
  */
 function getImageByID(id) {
     const hash = id % IMAGES.length;
-    return IMAGES[hash];
+    let selectedImage = IMAGES[hash];
+
+    // If the selected image is the same as the last one, pick the next available
+    if (selectedImage === lastUsedImage && IMAGES.length > 1) {
+        const nextIndex = (hash + 1) % IMAGES.length;
+        selectedImage = IMAGES[nextIndex];
+    }
+
+    lastUsedImage = selectedImage;
+    return selectedImage;
 }
 
 /**
