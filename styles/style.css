@@ -89,6 +89,21 @@ body {
     font-size: 16px;
 }
 
+#loader {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-weight: 500;
+    font-size: 24px;
+    background-color: var(--5);
+}
+
 /* ----- HEADER ----- */
 
 header {
@@ -217,7 +232,7 @@ section {
     font-size: 18px;
 }
 
-.info {
+.data-container {
     display: flex;
     gap: 12px;
 }
@@ -227,7 +242,7 @@ section {
     font-style: italic;
 }
 
-.info span {
+.data-container span {
     color: var(--4);
 }
 

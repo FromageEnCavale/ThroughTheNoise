@@ -6,9 +6,12 @@ const BEST_NEWS_API = `${HN_API_BASE}/beststories.json`;
 const LATEST_NEWS_API = `${HN_API_BASE}/topstories.json`;
 const ITEM_API = (id) => `${HN_API_BASE}/item/${id}.json`;
 const IMAGES = [
-    '../assets/img-black.png',
-    '../assets/img-green.png',
-    '../assets/img-white.png'
+    '../assets/DarkGreen.png',
+    '../assets/DarkGreenLess.png',
+    '../assets/Olive.png',
+    '../assets/OliveLess.png',
+    '../assets/VanDyke.png',
+    '../assets/VanDykeLess.png'
 ];
 const MIN_SCORE_LATEST = 0;
 
@@ -19,6 +22,11 @@ let bestNewsPage = 0;
 let latestNewsPage = 0;
 let bestNewsLoading = false;
 let latestNewsLoading = false;
+let isInitialLoad = true;
+let initialLoadComplete = {
+    best: false,
+    latest: false
+};
 
 // ===== Utility Functions =====
 
@@ -168,6 +176,19 @@ async function fetchItemsWithConcurrency(ids, onItemFetched, onBatchComplete) {
     onBatchComplete(validItemsCount);
 }
 
+/**
+ * Hide the loader once initial load is complete
+ */
+function checkAndHideLoader() {
+    if (initialLoadComplete.best && initialLoadComplete.latest) {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.style.display = 'none';
+        }
+        isInitialLoad = false;
+    }
+}
+
 // ===== Data Loading (Batch-based with streaming) =====
 
 /**
@@ -177,6 +198,8 @@ async function initializeBestNews() {
     const ids = await fetchFromAPI(BEST_NEWS_API);
     if (!ids || ids.length === 0) {
         console.error('Failed to load best news IDs');
+        initialLoadComplete.best = true;
+        checkAndHideLoader();
         return;
     }
     bestNewsIds = ids;
@@ -191,6 +214,8 @@ async function initializeLatestNews() {
     const ids = await fetchFromAPI(LATEST_NEWS_API);
     if (!ids || ids.length === 0) {
         console.error('Failed to load latest news IDs');
+        initialLoadComplete.latest = true;
+        checkAndHideLoader();
         return;
     }
     latestNewsIds = ids;
@@ -226,6 +251,12 @@ async function loadMoreBestNews() {
     // Define callback for when batch is complete
     const onBatchComplete = () => {
         updateBestNewsLoadButton();
+
+        // Mark initial load as complete for best news
+        if (isInitialLoad && bestNewsPage === 0) {
+            initialLoadComplete.best = true;
+            checkAndHideLoader();
+        }
     };
 
     // Fetch items with concurrency control
@@ -263,6 +294,12 @@ async function loadMoreLatestNews() {
     // Define callback for when batch is complete
     const onBatchComplete = () => {
         updateLatestNewsLoadButton();
+
+        // Mark initial load as complete for latest news
+        if (isInitialLoad && latestNewsPage === 0) {
+            initialLoadComplete.latest = true;
+            checkAndHideLoader();
+        }
     };
 
     // Fetch items with concurrency control
@@ -337,7 +374,7 @@ function renderLatestNewsItem(item) {
 
     link.innerHTML = `
     <div class="latest-title">${escapeHTML(item.title)}</div>
-    <div class="info">
+    <div class="data-container">
       <div class="date">${dateStr}</div>
       <span>(${domain})</span>
     </div>
